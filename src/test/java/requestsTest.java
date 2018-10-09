@@ -1,8 +1,9 @@
 import com.blueRibbon.ex.requests.CheckInRequestHandler;
+import com.blueRibbon.ex.requests.CoupunRequestHandler;
+import com.blueRibbon.ex.requests.TicketAvailableRequestHandler;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -10,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class requestsTest {
 
 
@@ -18,6 +18,20 @@ public class requestsTest {
     public void CheckInTest(){
         CheckInRequestHandler checkInRequestHandler = new CheckInRequestHandler();
         Assert.assertTrue(checkInRequestHandler.checkIn(1, "1234"));
+    }
+
+    @Test
+    public void TicketTest(){
+        TicketAvailableRequestHandler ticketAvailableRequestHandler = new TicketAvailableRequestHandler();
+        Assert.assertTrue(ticketAvailableRequestHandler.checkIfTicketAvailable(1));
+        Assert.assertFalse(ticketAvailableRequestHandler.checkIfTicketAvailable(4));
+    }
+
+    @Test
+    public void CoupunTest(){
+        CoupunRequestHandler coupunRequestHandler = new CoupunRequestHandler();
+        Assert.assertTrue(coupunRequestHandler.checkCoupon("12345"));
+        Assert.assertFalse(coupunRequestHandler.checkCoupon("1234"));
     }
 
 }

@@ -23,7 +23,7 @@ public class CoupunRequestHandler implements HttpHandler {
 
     private int[] discountAr = {10,50,60};
 
-    public synchronized boolean checkCoupon(int couponId){
+    public synchronized boolean checkCoupon(String couponId){
         return DbMockup.getInstance().getValidCoupons().contains(couponId);
     }
 
@@ -33,7 +33,7 @@ public class CoupunRequestHandler implements HttpHandler {
         logger.debug("received coupon http request");
         String response;
         Map<String,String > queries = utils.getQueryMap(httpExchange.getRequestURI().getQuery());
-        if (checkCoupon(Integer.valueOf(queries.get("couponId")))){
+        if (checkCoupon(queries.get("couponId"))){
             int rand = new Random().nextInt(discountAr.length);
             int discount = discountAr[rand];
             response = "discount is " + discount;
